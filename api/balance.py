@@ -34,7 +34,7 @@ def get_balance():
         return response.json()
     except Exception as e:
         return {
-            "error": "❌ OKX 호출 실패",
+            "error": "❌ OKX 응답 실패",
             "status_code": response.status_code,
             "text": response.text,
             "exception": str(e)
@@ -42,7 +42,6 @@ def get_balance():
 
 def handler(request):
     return get_balance()
-# https://vercel-okx-deploy-ldce91oa3p-xxxxx.vercel.app/api/balance
-def handler(request):
-    return get_balance()
 
+# 테스트 주소 예시:
+# https://vercel-okx-deploy-xxxxx.vercel.app/api/balance
