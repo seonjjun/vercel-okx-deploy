@@ -1,12 +1,7 @@
-from flask import Flask, jsonify
-import time
-import base64
-import hashlib
-import hmac
-import json
-import requests
+import time, base64, hashlib, hmac, json, requests
+from flask import Flask, jsonify, request
 
-app = Flask(__name__)  # ✅ Flask 앱 선언
+app = Flask(__name__)
 
 API_KEY = 'ff8d0b4a-fdda-4de1-a579-b2076593b7fa'
 SECRET_KEY = '49E886BC5608EAB889274AB16323A1B1'
@@ -34,12 +29,12 @@ def get_balance():
     }
 
     try:
-        response = requests.get(url, headers=headers)
-        return jsonify(response.json())
+        res = requests.get(url, headers=headers)
+        return jsonify(res.json())
     except Exception as e:
         return jsonify({
-            "error": "❌ OKX 호출 실패",
+            "error": "OKX 호출 실패",
             "exception": str(e)
         }), 500
 
-handler = app  # ✅ Vercel에서 Flask 실행을 위한 엔트리포인트
+handler = app
