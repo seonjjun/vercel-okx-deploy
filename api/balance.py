@@ -1,9 +1,11 @@
+from flask import Flask, jsonify, request
 import time
 import base64
 import hashlib
 import hmac
-import json
 import requests
+
+app = Flask(__name__)
 
 API_KEY = 'ff8d0b4a-fdda-4de1-a579-b2076593b7fa'
 SECRET_KEY = '49E886BC5608EAB889274AB16323A1B1'
@@ -14,6 +16,7 @@ def generate_signature(timestamp, method, request_path, body):
     mac = hmac.new(SECRET_KEY.encode(), message.encode(), hashlib.sha256)
     return base64.b64encode(mac.digest()).decode()
 
+@app.route('/api/balance', methods=['GET'])
 def get_balance():
     url = 'https://www.okx.com/api/v5/account/balance'
     timestamp = str(time.time())
@@ -29,17 +32,14 @@ def get_balance():
         'Content-Type': 'application/json'
     }
 
-    response = requests.get(url, headers=headers)
     try:
-        return response.json()
+        response = requests.get(url, headers=headers)
+        return jsonify(response.json())
     except Exception as e:
-        return {
+        return jsonify({
             "error": "❌ OKX 호출 실패",
-            "status_code": response.status_code,
-            "text": response.text,
             "exception": str(e)
-        }
+        }), 500
 
-def handler(request):
-    return get_balance()
-
+# Vercel에서 handler로 인식할 수 있도록 Flask 앱 노출
+handler = app
