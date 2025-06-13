@@ -1,11 +1,12 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 import time
 import base64
 import hashlib
 import hmac
+import json
 import requests
 
-app = Flask(__name__)
+app = Flask(__name__)  # ✅ Flask 앱 선언
 
 API_KEY = 'ff8d0b4a-fdda-4de1-a579-b2076593b7fa'
 SECRET_KEY = '49E886BC5608EAB889274AB16323A1B1'
@@ -41,5 +42,4 @@ def get_balance():
             "exception": str(e)
         }), 500
 
-# Vercel에서 handler로 인식할 수 있도록 Flask 앱 노출
-handler = app
+handler = app  # ✅ Vercel에서 Flask 실행을 위한 엔트리포인트
