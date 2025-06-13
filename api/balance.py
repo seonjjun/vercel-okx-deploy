@@ -43,3 +43,6 @@ def get_balance():
 def handler(request):
     return get_balance()
 # https://vercel-okx-deploy-ldce91oa3p-xxxxx.vercel.app/api/balance
+def handler(request):
+    return get_balance()
+
