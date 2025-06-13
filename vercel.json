@@ -2,7 +2,7 @@
   "version": 2,
   "functions": {
     "api/balance.py": {
-      "runtime": "vercel-python@0.8.0"
+      "runtime": "vercel-python@0.5.2"
     }
   },
   "routes": [
