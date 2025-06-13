@@ -5,9 +5,9 @@ import hmac
 import json
 import requests
 
-API_KEY = '여기에_본인_API_KEY'
-SECRET_KEY = '여기에_본인_SECRET_KEY'
-PASSPHRASE = '여기에_본인_PASSPHRASE'
+API_KEY = 'ff8d0b4a-fdda-4de1-a579-b2076593b7fa'
+SECRET_KEY = '49E886BC5608EAB889274AB16323A1B1'
+PASSPHRASE = '#eseoAI0612'
 
 def generate_signature(timestamp, method, request_path, body):
     message = f'{timestamp}{method}{request_path}{body}'
